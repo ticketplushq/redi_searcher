@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Patricio Beckmann"]
   s.email       = ["pato.beckmann@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/Ticketplus/redi_searcher"
   s.summary     = %q{RediSearch ruby client}
   s.description = %q{''}
   s.required_ruby_version = '>= 2.3'
