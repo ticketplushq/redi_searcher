@@ -18,7 +18,6 @@ module RediSearcher
     end
 
     def add(**options)
-      byebug
       index.client.call(ft_add(options))
     end
 

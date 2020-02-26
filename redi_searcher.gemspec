@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "redisearcher/version"
+require "redi_searcher/version"
 
 Gem::Specification.new do |s|
-  s.name        = "redisearcher"
+  s.name        = "redi_searcher"
   s.version     = RediSearcher::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Patricio Beckmann"]

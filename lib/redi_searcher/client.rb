@@ -1,7 +1,7 @@
 module RediSearcher
   class Client
 
-    def initialize(redis = {}, *args)      
+    def initialize(redis = {}, *args)
       @redis = Redis.new(redis)
     end
 
@@ -30,7 +30,7 @@ module RediSearcher
     def valid_command?(command)
       %w(FT.CREATE FT.ADD FT.ADDHASH FT.SEARCH FT.DEL FT.DROP FT.GET FT.MGET
          FT.SUGADD FT.SUGGET FT.SUGDEL FT.SUGLEN FT.SYNADD FT.SYNUPDATE FT.SYNDUMP
-         FT.INFO FT.AGGREGATE FT.EXPLAIN FT.TAGVALS).include?(command)
+         FT.INFO FT.AGGREGATE FT.EXPLAIN FT.TAGVALS FT.CONFIG).include?(command)
     end
 
   end
