@@ -1,7 +1,8 @@
 module RediSearcher
   class Document < Client::CommandBase
     OPTIONS_FLAGS = {
-      add: [:nosave, :replace, :partial]
+      add: [:nosave, :replace, :partial],
+      del: [:dd]
     }
 
     OPTIONS_PARAMS = {
@@ -21,10 +22,18 @@ module RediSearcher
       index.client.call(ft_add(options))
     end
 
+    def del(**options)
+      index.client.call(ft_del(options))
+    end
+
     private
 
     def ft_add(**options)
       ['FT.ADD', index.name , doc_id, weight, *serialize_options(:add, options), 'FIELDS', *serialize_fields]
+    end
+
+    def ft_del(**options)
+      ['FT.DEL', index.name , doc_id, *serialize_options(:del, options)]
     end
 
     def serialize_fields
