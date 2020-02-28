@@ -14,7 +14,7 @@ module RediSearcher
     def initialize(index, doc_id, weight = nil, **fields)
       @index = index
       @doc_id = doc_id
-      @fields = fields
+      @fields = filter_by_schema(fields)
       @weight = weight || RediSearcher::DEFAULT_WEIGHT
     end
 
@@ -38,8 +38,23 @@ module RediSearcher
 
     def serialize_fields
       fields.map do |key, value|
+        if value.is_a? Array
+          value = serialize_tag_array(value, schema_fields[key][:options][:separator]) if schema_fields[key][:type] == :tag
+        end
         [(key.to_s rescue key) || key, value]
       end.compact
+    end
+
+    def serialize_tag_array(values, separator)
+      values.map { |value| value.to_s.gsub(separator, '') }.join(separator)
+    end
+
+    def schema_fields
+      Hash[index.schema.fields.map {|field| [field.name, {type: field.type, options: field.options}] }]
+    end
+
+    def filter_by_schema(fields)
+      fields.slice(*schema_fields.keys)
     end
 
   end

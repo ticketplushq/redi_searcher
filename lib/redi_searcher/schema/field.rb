@@ -14,9 +14,10 @@ module RediSearcher
       attr_reader :name, :type, :options
 
       def initialize(name, type, **options)
+        default_options = type == :tag ? {separator: ','} : {}
         @name = name
         @type = type
-        @options = options
+        @options = default_options.deep_merge(options)
       end
 
       def serialize

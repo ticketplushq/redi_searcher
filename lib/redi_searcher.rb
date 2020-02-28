@@ -7,7 +7,7 @@ require 'redi_searcher/schema/field'
 require 'redi_searcher/index'
 require 'redi_searcher/document'
 
-
+require 'redis'
 
 module RediSearcher
   DEFAULT_WEIGHT = '1.0'
