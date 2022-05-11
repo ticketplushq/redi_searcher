@@ -1,15 +1,5 @@
 module RediSearcher
   class Index < Client::CommandBase
-    OPTIONS_FLAGS = {
-      create: [:nooffsets, :nofreqs, :nohl, :nofields],
-      drop: [:keepdocs],
-      search: [:nocontent, :verbatim, :nostopwords, :withscores, :withsortkeys],
-    }
-
-    OPTIONS_PARAMS = {
-      create: [:stopwords],
-      search: [:filter, :return, :infields, :inkeys, :slop, :scorer, :sortby, :limit, :payload],
-    }
 
     attr_reader :client, :name, :schema
 
@@ -50,15 +40,15 @@ module RediSearcher
     private
 
     def ft_create(schema, **options)
-      ['FT.CREATE', name , *serialize_options(:create, options), 'SCHEMA', *schema.serialize]
+      Commands::Create.new(name, schema, options).serialize
     end
 
     def ft_drop(**options)
-      ['FT.DROP', name, *serialize_options(:drop, options)]
+      Commands::DropIndex.new(name, options).serialize
     end
 
     def ft_search(query, **options)
-      ['FT.SEARCH', name, query, *serialize_options(:search, options)]
+      Commands::Search.new(name, query, options).serialize
     end
 
     def ft_info

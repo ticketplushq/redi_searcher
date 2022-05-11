@@ -28,9 +28,7 @@ module RediSearcher
     end
 
     def valid_command?(command)
-      %w(FT.CREATE FT.ADD FT.ADDHASH FT.SEARCH FT.DEL FT.DROP FT.GET FT.MGET
-         FT.SUGADD FT.SUGGET FT.SUGDEL FT.SUGLEN FT.SYNADD FT.SYNUPDATE FT.SYNDUMP
-         FT.INFO FT.AGGREGATE FT.EXPLAIN FT.TAGVALS FT.CONFIG).include?(command)
+      %w(FT.CREATE FT.SEARCH FT.DROPINDEX FT.INFO FT.EXPLAIN).include?(command)
     end
 
   end

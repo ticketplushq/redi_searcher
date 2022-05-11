@@ -10,8 +10,6 @@ require 'redi_searcher/document'
 require 'redis'
 
 module RediSearcher
-  DEFAULT_WEIGHT = '1.0'
-
   class << self
     def client
       @client ||= Client.new
